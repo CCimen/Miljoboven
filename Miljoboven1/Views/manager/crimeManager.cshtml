@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "_LoginManagerLayout";
+}
+@model IMiljobovenRepository
+
+<h2>Detaljer för ärendet</h2>
+<p class="info">Du är inloggad som avdelningschef</p>
+@await Component.InvokeAsync("ErrandData", ViewBag.ID);
+
+<section id="bottomColumn">
+    <h3>Redigera ärende</h3>
+    <p>
+        Ange handläggare:
+        <select name="investigator">
+            <option selected="selected">Välj</option>
+            @foreach (var investigator in Model.Employees)
+            {
+                <option value="@investigator.EmployeeId">@investigator.EmployeeName</option>
+            }
+        </select>
+    </p>
+    <p><input type="checkbox" name="noAction" value="true"/> Ingen åtgärd: <input type="text" name="reason" value="Ange motivering"/></p>
+    <p>
+        <input class="button" type="submit" value="Spara"/>
+    </p>
+</section>
